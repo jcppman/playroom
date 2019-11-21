@@ -23,7 +23,7 @@ import 'codemirror/addon/hint/show-hint';
 import 'codemirror/addon/hint/xml-hint';
 
 import HamburgerMenu from '@splunk/react-icons/HamburgerMenu';
-import SidePanelContainer from './sidePanelContainer';
+import SidePanel from './SidePanel';
 
 const themesImport = require('./themes');
 const componentsImport = require('./components');
@@ -391,7 +391,7 @@ export default class Playroom extends Component {
           </div>
           {codeMirrorEl}
         </Resizable>
-        <SidePanelContainer
+        <SidePanel
           panelOpen={this.state.panelOpen}
           closePanel={() => {
             this.setPanelOpen(false);

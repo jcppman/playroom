@@ -1,42 +1,18 @@
-const aliases = require('./aliases');
-const merge = require('lodash/merge');
-const mapValues = require('lodash/mapValues');
+import React from 'react';
+import PropTypes from 'prop-types';
 
-const modules = ['@splunk/react-ui', '@splunk/react-icons'];
+const withPropTypes = component => {
+  component.propTypes = {
+    color: PropTypes.oneOf(['red', 'blue'])
+  };
 
-// const contexts = modules.map((moduleName) => {
-//   return require.context(
-//     moduleName,
-//     false,
-//     /\.js$/,
-//   );
-// })
-
-const uiContext = require.context('@splunk/react-ui', false, /\.js$/);
-
-const iconContext = require.context('@splunk/react-icons', false, /\.js$/);
-
-const processFilename = f => f.match(/\.\/(.*?)\.js/)[1];
-
-const extractComponents = context => {
-  return context.keys().reduce((accum, curr) => {
-    let comp;
-    try {
-      comp = context(curr).default;
-    } catch {
-      // do nothing
-    }
-
-    if (comp) {
-      accum[processFilename(curr)] = comp;
-    }
-    return accum;
-  }, {});
+  return component;
 };
 
-const components = [uiContext, iconContext].reduce((accum, context) => {
-  const component = extractComponents(context);
-  return { ...accum, ...component };
-}, {});
+export const Foo = withPropTypes(({ color }) => (
+  <div style={{ color }}>Foo</div>
+));
 
-module.exports = merge(components, mapValues(aliases, (v, k) => components[v]));
+export const Bar = withPropTypes(({ color }) => (
+  <div style={{ color }}>Bar</div>
+));

@@ -4,7 +4,7 @@ import SidePanel from '@splunk/react-ui/SidePanel';
 import Button from '@splunk/react-ui/Button';
 import ChevronLeft from '@splunk/react-icons/ChevronLeft';
 
-class SidePanelContainer extends Component {
+class SidePanel extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -57,4 +57,4 @@ class SidePanelContainer extends Component {
   }
 }
 
-export default SidePanelContainer;
+export default SidePanel;
