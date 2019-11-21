@@ -24,8 +24,10 @@ class SidePanelContainer extends Component {
   goBack = () => {
     const { pageStack } = this.state;
     // check stack status
-    if (pageStack.length <= 1) {
-      console.error("last page in stack: can't go back");
+    if (pageStack.length < 1) {
+      console.error("no page in stack: shouldn't be here");
+    } else if (pageStack.length === 1) {
+      this.props.closePanel();
     } else {
       const newStack = dropRight(pageStack);
       this.setState({ pageStack: newStack, currentPage: last(pageStack) });
