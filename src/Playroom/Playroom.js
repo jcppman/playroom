@@ -22,6 +22,9 @@ import 'codemirror/addon/edit/closebrackets';
 import 'codemirror/addon/hint/show-hint';
 import 'codemirror/addon/hint/xml-hint';
 
+import HamburgerMenu from '@splunk/react-icons/HamburgerMenu';
+import SidePanelContainer from './sidePanelContainer';
+
 const themesImport = require('./themes');
 const componentsImport = require('./components');
 
@@ -90,7 +93,8 @@ export default class Playroom extends Component {
       code: null,
       renderCode: null,
       height: 200,
-      editorUndocked: false
+      editorUndocked: false,
+      panelOpen: false
     };
   }
 
@@ -131,6 +135,12 @@ export default class Playroom extends Component {
   setEditorUndocked = val => {
     this.setState({
       editorUndocked: val
+    });
+  };
+
+  setPanelOpen = state => {
+    this.setState({
+      panelOpen: state
     });
   };
 
@@ -372,9 +382,21 @@ export default class Playroom extends Component {
               className={styles.toolbarIcon}
               onClick={this.handleUndockEditor}
             />
+            <HamburgerMenu
+              className={styles.toolbarIcon}
+              onClick={() => {
+                this.setPanelOpen(true);
+              }}
+            />
           </div>
           {codeMirrorEl}
         </Resizable>
+        <SidePanelContainer
+          panelOpen={this.state.panelOpen}
+          closePanel={() => {
+            this.setPanelOpen(false);
+          }}
+        />
       </div>
     );
   }
